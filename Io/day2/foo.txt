@@ -1,0 +1,3 @@
+TwoDimList clone do(
+	innerList := list(list("a", "b");, list(3, 4););
+)
