@@ -1,21 +1,20 @@
 Builder := Object clone
 
-stack := list(0)
-spaces := 4
+indentationLevel := 0
+spaces := 2
 
 Builder forward := method(
-  stack println
-  i := stack pop
-  writeln(" " repeated(i * spaces) with("<", call message name, ">"))
+  actualLevel := indentationLevel
+  writeln(" " repeated(actualLevel * spaces) with("<", call message name, ">"))
   call message arguments foreach(
     arg,
-    stack append(i + 1)
+    indentationLevel = actualLevel + 1
     content := doMessage(arg)
-    if(content type == "Sequence", writeln(" " repeated(i * 2 * spaces) with(content))))
-  writeln(" " repeated(i * spaces) with("</", call message name, ">")))
+    if(content type == "Sequence", writeln(" " repeated(actualLevel * 2 * spaces) with(content))))
+  writeln(" " repeated(actualLevel * spaces) with("</", call message name, ">")))
 
 Builder ul(
-  li("lo", li("a")),
+  li("Io"),
   li("Lua"),
   li("JavaScript"))
 
